@@ -1,18 +1,29 @@
+//IMPORTACIONES
+import "./App.css";
+//establecer la importacion de Hook
+//destructuracion de objetos
+//React.useState
 import React, { useState } from "react";
 
 function App() {
   // 1. HOOKS - ESTADO LOCAL (USESTATE)
+  // ES LA GESTIÓN DE DATOS DENTRO DEL COMPONENTE
+  // const [valor, fxValor] = useState([ESTADO INICIAL])
+
+  //A.Utilizamos para definir un nuevo comentario del formulario
   const [comentario, setComentario] = useState({
     title: "",
     description: "",
   });
 
-  // B. Guardamos en un array los comentarios
+  // B. DEFINIR EL LISTADO DE TODOS LOS COMENTARIOS DE LA APLICACIÓN
   //el valor inicial es un array vacio
   const [listadoComentarios, setListadoComentarios] = useState([]);
   //CRUD
   //CREAR
   const agregarComentario = (e) => {
+    // EVITA LA RECARGA DE PÁGINA POR DEFECTO DEL SITIO CUANDO SE EJECUTA UN MÉTODO ESPECÍFICO
+
     //evitamos comportamiento por default
     e.preventDefault();
 
@@ -43,6 +54,13 @@ function App() {
   };
 
   const capturarDatos = (e) => {
+    console.log(e);
+    console.log(e.target.value); // ESTE ES EL VALOR DEL CAMPO DE TEXTO
+
+    // FUNCIÓN DEL HOOK VA A REEMPLAZAR COMPLETAMENTE EL VALOR
+    // DEL ESTADO LOCAL DE "COMENTARIO"
+    // LA REGLA ES: SIEMPRE QUE MANIPULES USA EL MISMO TIPO DE DATO
+
     //usar el hook para capturar los datos
     return setComentario({
       //clonamos la data existente
@@ -68,6 +86,8 @@ function App() {
         <h3>Escribe un título</h3>
         <input
           name="title"
+          //valor del formulario esta conectado con el estado local
+
           value={comentario.title}
           onChange={(event) => capturarDatos(event)}
         />
